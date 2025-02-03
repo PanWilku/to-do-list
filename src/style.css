@@ -1,1 +1,7 @@
-@import "tailwindcss";
+@import "tailwindcss";  /* Import Tailwind base, components, and utilities */
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+@theme {
+    --font-sans: "Gloria Hallelujah", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  
