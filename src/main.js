@@ -1,13 +1,17 @@
 import "./style.css";
-import { formatDistance, subDays } from "date-fns";
-import { initializeUI } from "./ui.js";
+import { initializeUI, renderProjects, renderTasks } from "./ui.js";
+import { Project } from "./models/Project.js"
 
-const a = formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
+const projects = [Project.defaultProject(), Project.defaultProject()];
 
 
 function initApp() {
 
+
+
 initializeUI();
+renderProjects(projects);
+renderTasks(projects[0]);
 
 }
 
