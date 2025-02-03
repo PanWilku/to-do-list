@@ -91,7 +91,7 @@ export function renderTasks(project) {
 
     const taskContainer = document.getElementById("task-container");
     taskContainer.innerHTML = "";
-    
+
     project.tasks.forEach((task, index) => {
         const taskDiv = document.createElement("div");
         taskDiv.id = index;
@@ -116,12 +116,12 @@ export function renderTasks(project) {
 
         const editBtn = document.getElementById(`edit-btn-${index}`);
         editBtn.addEventListener("click", () => {
-            handleEditBtn();
+            Project.handleEditTask(index, currentDisplayedProject);
         });
 
         const deleteBtn = document.getElementById(`delete-btn-${index}`);
         deleteBtn.addEventListener("click", () => {
-            handleDeleteBtn();
+            Project.handleDeleteTask(index, currentDisplayedProject);
         });
 
         const taskCheckbox = document.getElementById(`task-checkbox-${index}`);

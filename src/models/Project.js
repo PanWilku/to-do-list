@@ -113,11 +113,12 @@ export class Project {
         };
       
 
-    removeTask(task) {
-
+    static handleDeleteTask(index, currentDisplayedProject) {
+        currentDisplayedProject.tasks.splice(index, 1);
+        renderTasks(currentDisplayedProject);
     };
 
-    updateTask(task) {
-
+    static handleEditTask(index, currentDisplayedProject) {
+        
     };
 }
