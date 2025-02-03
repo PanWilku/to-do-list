@@ -100,7 +100,7 @@ export function renderTasks(project) {
         taskDiv.innerHTML += `
         <div class="flex w-full">
             <div class="flex w-3/5 flex-col bg-blue-600 gap-4 p-2">
-                <p class="text-2xl">${task.title}
+                <p class="text-2xl break-words">${task.title}
                 <p>Description: ${task.description}</p>
                 <p>Due to: ${task.dueDate}, ${task.priority} priority</p>
             </div>
