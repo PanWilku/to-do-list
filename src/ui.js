@@ -44,11 +44,16 @@ export function initializeUI(projects) {
     });
 
 
+
+    const addDeleteDiv = document.createElement("div");
+    addDeleteDiv.className = "flex gap-4"
+    sideBar.appendChild(addDeleteDiv);
+
     const addProjectDiv = document.createElement("div");
     addProjectDiv.id = "add-project-div";
     addProjectDiv.innerHTML = `
     <div class="flex flex-col w-full items-center gap-2">
-        <button id="add-project-btn" class="flex items-center justify-center bg-emerald-500" aria-label="Add Task">
+        <button id="add-project-btn" class="flex items-center justify-center bg-emerald-500" aria-label="Add Project">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
         </svg>
@@ -56,12 +61,30 @@ export function initializeUI(projects) {
         <p>Add Project</p>
     </div>
             `
-    sideBar.appendChild(addProjectDiv);
+    addDeleteDiv.appendChild(addProjectDiv);
     const addProjectBtn = document.getElementById("add-project-btn");
     addProjectBtn.addEventListener("click", () => {
         Project.handleAddProject();
     });
 
+
+    const deleteProjectDiv = document.createElement("div");
+    deleteProjectDiv.id = "add-project-div";
+    deleteProjectDiv.innerHTML = `
+        <div class="flex flex-col w-full items-center gap-2">
+        <button id="delete-project-btn" class="flex items-center justify-center bg-red-300" aria-label="Delete Project">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+            </svg>
+        </button>
+        <p>Delete Project</p>
+        </div>
+            `
+    addDeleteDiv.appendChild(deleteProjectDiv);
+    const deleteProjectBtn = document.getElementById("delete-project-btn");
+    deleteProjectBtn.addEventListener("click", () => {
+        Project.handleDeleteProject();
+    });
 
 
 
@@ -73,7 +96,9 @@ export function renderProjects(projects) {
     const element = document.getElementById("project-container");
     if (element) {
       element.remove(); //causes re-render of projects
+      renderTasks(projects[0]); //causes re-render of tasks after deletion of project
     };
+
 
     const sideBar = document.getElementById("side-bar");
     const taskWindow = document.getElementById("task-window");

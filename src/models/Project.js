@@ -102,10 +102,8 @@ export class Project {
                 formData.finished === 'yes' // convert to boolean
               );
           
-              // Add the new task to the currentProject
               currentProject.addTask(newTask);
           
-              // Optionally, update the UI (e.g., re-render the task list)
               renderTasks(currentProject);
           
               Swal.fire("Saved!", "", "success");
@@ -202,7 +200,7 @@ export class Project {
                 task.completed = formData.finished === "yes";
             
             
-                // Optionally, update the UI (e.g., re-render the task list)
+
                 renderTasks(currentDisplayedProject);
             
                 Swal.fire("Saved!", "", "success");
@@ -239,18 +237,59 @@ export class Project {
         if (result.isConfirmed) {
           const formData = result.value;
           
-          // Create a new project. Assuming the constructor accepts an array of tasks (empty here) and the project name.
           const newProject = new Project([], formData.projectName);
           
-          // Add the new project to the projects array
           projects.push(newProject);
           
           renderProjects(projects);
           
           Swal.fire("Added!", "New project added successfully.", "success");
-        }
+        };
       });
 
     };
 
+
+
+    static handleDeleteProject() {
+      Swal.fire({
+        title: "Delete Project",
+        html: `
+          <form id="deleteProjectForm" class="flex flex-col items-start gap-4">
+            <label class="flex items-center gap-2">
+              <span class="w-25 text-right">Select Project:</span>
+              <select id="deleteProjectSelect" class="border-2 p-1 max-w-[300px]" required>
+                <option value="" disabled selected>Select a project</option>
+                ${projects.map((project, index) => `<option value="${index}">${project.name}</option>`).join('')}
+              </select>
+            </label>
+          </form>
+        `,
+        showCancelButton: true,
+        confirmButtonText: "Delete Project",
+        focusConfirm: false,
+        preConfirm: () => {
+          // Retrieve the selected project's index from the Swal popup
+          const selectEl = Swal.getPopup().querySelector('#deleteProjectSelect');
+          const projectIndex = selectEl.value;
+          
+          if (projectIndex === "") {
+            Swal.showValidationMessage("Please select a project to delete");
+          }
+          
+          return { projectIndex };
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const { projectIndex } = result.value;
+          
+          projects.splice(projectIndex, 1);
+
+          renderProjects(projects);
+          
+          Swal.fire("Deleted!", "Project has been deleted.", "success");
+        }
+      });
+    };
+    
   };
