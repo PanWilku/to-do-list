@@ -1,6 +1,7 @@
 import {Task} from "./Task";
 import Swal from 'sweetalert2'
-import { renderTasks } from "../ui";
+import { renderTasks, renderProjects } from "../ui";
+import { projects } from "../main";
 
 export class Project {
     constructor(tasks, name) {
@@ -208,4 +209,48 @@ export class Project {
               }
             });
     };
-}
+
+
+    static handleAddProject() {
+
+      Swal.fire({
+        title: "Add New Project",
+        html: `
+          <form id="projectForm" class="flex flex-col items-start gap-4">
+            <!-- Project Name Field -->
+            <label class="flex items-center gap-2">
+              <span class="w-25 text-right">Project Name:</span>
+              <input id="projectName" type="text" class="border-2 p-1" maxlength="50" required>
+            </label>
+          </form>
+        `,
+        showCancelButton: true,
+        confirmButtonText: "Add Project",
+        focusConfirm: false,
+        preConfirm: () => {
+          // Retrieve and trim the project name from the Swal popup
+          const projectName = Swal.getPopup().querySelector('#projectName').value.trim();
+          if (!projectName) {
+            Swal.showValidationMessage("Please enter a project name");
+          }
+          return { projectName };
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const formData = result.value;
+          
+          // Create a new project. Assuming the constructor accepts an array of tasks (empty here) and the project name.
+          const newProject = new Project([], formData.projectName);
+          
+          // Add the new project to the projects array
+          projects.push(newProject);
+          
+          renderProjects(projects);
+          
+          Swal.fire("Added!", "New project added successfully.", "success");
+        }
+      });
+
+    };
+
+  };

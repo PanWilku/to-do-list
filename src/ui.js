@@ -44,17 +44,44 @@ export function initializeUI(projects) {
     });
 
 
+    const addProjectDiv = document.createElement("div");
+    addProjectDiv.id = "add-project-div";
+    addProjectDiv.innerHTML = `
+    <div class="flex flex-col w-full items-center gap-2">
+        <button id="add-project-btn" class="flex items-center justify-center bg-emerald-500" aria-label="Add Task">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        </button>
+        <p>Add Project</p>
+    </div>
+            `
+    sideBar.appendChild(addProjectDiv);
+    const addProjectBtn = document.getElementById("add-project-btn");
+    addProjectBtn.addEventListener("click", () => {
+        Project.handleAddProject();
+    });
+
+
+
+
 };
 
 
 export function renderProjects(projects) {
 
+    const element = document.getElementById("project-container");
+    if (element) {
+      element.remove(); //causes re-render of projects
+    };
+
     const sideBar = document.getElementById("side-bar");
     const taskWindow = document.getElementById("task-window");
 
     const projectContainer = document.createElement("div");
+    projectContainer.id = "project-container";
     projectContainer.innerHTML = "";
-    projectContainer.className = "flex flex-col w-full h-100px p-2 gap-12";
+    projectContainer.className = "flex flex-col w-full h-100px p-2 gap-12 bg-red-400";
 
 
 
@@ -65,7 +92,6 @@ export function renderProjects(projects) {
 
 
     sideBar.appendChild(projectContainer);
-
 
 
     projects.forEach((project, index) => {
