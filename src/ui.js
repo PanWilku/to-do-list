@@ -9,15 +9,15 @@ export function initializeUI(projects) {
     
     const sideBar = document.createElement("div");
     sideBar.id = "side-bar";
-    sideBar.className = "flex w-1/4 h-100vh bg-gray-200 justify-start align- flex-col items-center gap-10";
+    sideBar.className = "flex sm:w-1/4 h-100vh justify-start flex-col items-center gap-10 max-sd:w-full";
     app.appendChild(sideBar);
     const taskWindow = document.createElement("div");
     taskWindow.id = "task-window";
-    taskWindow.className = "flex flex-col justify-start w-3/4 h-100vh bg-gray-100 pt-20 bg-green-200 gap-15"
+    taskWindow.className = "flex flex-col justify-start sm:w-3/4 max-sm:w-full h-100vh pt-20 gap-10"
     app.appendChild(taskWindow);
 
     const header = document.createElement('header');
-    header.innerHTML = `<h1 class="flex text-4xl font-bold my-4 justify-center">Todo List</h1>`;
+    header.innerHTML = `<h1 class="flex text-4xl font-bold justify-center">Todo List</h1>`;
     taskWindow.appendChild(header);
 
     const projectHeader = document.createElement("header");
@@ -28,8 +28,8 @@ export function initializeUI(projects) {
     const addTaskDiv = document.createElement("div");
     addTaskDiv.id = "add-task-div";
     addTaskDiv.innerHTML = `
-    <div class="flex flex-col w-full items-end gap-2 pr-12">
-        <button id="add-task-btn" class="flex items-center justify-center bg-emerald-500" aria-label="Add Task">
+    <div class="flex flex-col w-full sm:items-end max-sm:items-center gap-2 sm:pr-12">
+        <button id="add-task-btn" class="flex items-center justify-center bg-green-400 transition ease-in-out duration-300 hover:scale-110 hover:bg-green-500" aria-label="Add Task">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
         </svg>
@@ -53,7 +53,7 @@ export function initializeUI(projects) {
     addProjectDiv.id = "add-project-div";
     addProjectDiv.innerHTML = `
     <div class="flex flex-col w-full items-center gap-2">
-        <button id="add-project-btn" class="flex items-center justify-center bg-emerald-500" aria-label="Add Project">
+        <button id="add-project-btn" class="flex items-center justify-center bg-green-400 transition ease-in-out duration-300 hover:scale-110 hover:bg-green-500" aria-label="Add Project">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
         </svg>
@@ -72,7 +72,7 @@ export function initializeUI(projects) {
     deleteProjectDiv.id = "add-project-div";
     deleteProjectDiv.innerHTML = `
         <div class="flex flex-col w-full items-center gap-2">
-        <button id="delete-project-btn" class="flex items-center justify-center bg-red-300" aria-label="Delete Project">
+        <button id="delete-project-btn" class="flex items-center justify-center bg-red-300 transition ease-in-out duration-300 hover:scale-110" aria-label="Delete Project">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
             </svg>
@@ -106,13 +106,13 @@ export function renderProjects(projects) {
     const projectContainer = document.createElement("div");
     projectContainer.id = "project-container";
     projectContainer.innerHTML = "";
-    projectContainer.className = "flex flex-col w-full h-100px p-2 gap-12 bg-red-400";
+    projectContainer.className = "flex flex-col w-full h-100px p-2 gap-12";
 
 
 
     const taskContainer = document.createElement("div");
     taskContainer.id = "task-container";
-    taskContainer.className = "flex w-full flex-col p-6 gap-8";
+    taskContainer.className = "flex w-full flex-col gap-8 sm:pl-8 sm:pt-8 sm:pb-8 max-sm: p-4";
     taskWindow.appendChild(taskContainer);
 
 
@@ -123,7 +123,7 @@ export function renderProjects(projects) {
 
         const button = document.createElement("button");
         button.id = "button-" + index;
-        button.className = "flex bg-red-200 rounded-full p-6"
+        button.className = "flex rounded-xl p-6 bg-gray-400 transition ease-in-out duration-300 hover:scale-110"
         button.textContent = project.name;
         button.addEventListener("click", () => {
             renderTasks(project);
@@ -149,19 +149,18 @@ export function renderTasks(project) {
         taskContainer.appendChild(taskDiv);
 
         taskDiv.innerHTML += `
-        <div class="flex w-full">
-            <div class="flex w-3/5 flex-col bg-blue-600 gap-4 p-2">
-                <p class="text-2xl break-words">${task.title}
-                <p>Description: ${task.description}</p>
+        <div class="flex w-full border-2 rounded-lg hover:bg-gray-400">
+            <div class="flex sm:w-3/5 max-sm:w-3/6 flex-col gap-4 p-2">
+                <p class="text-2xl break-words flex-wrap">${task.title}
+                <p class="break-words flex-wrap">Description: ${task.description}</p>
                 <p>Due to: ${task.dueDate}, ${task.priority} priority</p>
             </div>
-            <div class="flex w-2/5 items-center bg-amber-400 gap-8 p-2 justify-center">
+            <div class="flex sm:w-2/5 max-sm:w-3/6 items-center sm:gap-8 max-sm: gap-4 p-2 justify-center">
             <div class="flex flex-col gap-4">
-                <button class="bg-lime-300 p-2 cursor-pointer" id="edit-btn-${index}">Edit</button>
-                <button class="bg-red-500 p-2 cursor-pointer" id="delete-btn-${index}">Delete</button>
+                <button class="bg-lime-200 hover:bg-lime-400 transition ease-in-out duration-300 hover:scale-110 p-2 cursor-pointer rounded-xl" id="edit-btn-${index}">Edit</button>
+                <button class="bg-red-300 hover:bg-red-400 p-2 transition ease-in-out duration-300 hover:scale-110 cursor-pointer rounded-xl" id="delete-btn-${index}">Delete</button>
             </div>
                 <input type="checkbox" class="form-checkbox h-10 w-10 text-blue-600 cursor-pointer" id="task-checkbox-${index}" ${task.completed ? 'checked' : ''}>
-    
             </div>
       </div>`;
 
