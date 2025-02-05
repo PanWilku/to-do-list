@@ -14,11 +14,11 @@ function getDefaultProjects() {
     Project.defaultProject(),
     new Project(
       [
-        new Task("Go to the concert", "TS concert", "2026/06/22", "medium", false),
+        new Task("Go to the concert", "TS concert", "2026-06-22", "medium", false),
         new Task(
           "Go to the supermarket",
           "tomatoes, cucumber, olive oil",
-          "2025/02/05",
+          "2025-02-05",
           "high",
           false
         ),
@@ -29,7 +29,6 @@ function getDefaultProjects() {
 }
 
 function initApp() {
-
   const loadedProjects = loadProjectsFromLocalStorage();
 
   if (loadedProjects && loadedProjects.length > 0) {

@@ -11,8 +11,8 @@ export class Project {
 
     static defaultProject() {
         return new Project([
-          new Task("Make an account on Shopify", "", "2025/01/12", "high", true),
-          new Task("Go with the dog", "", "2025/01/12", "high", false)
+          new Task("Make an account on Shopify", "Let's make millions!", "2025-01-12", "high", true),
+          new Task("Go with the dog", "Go as early as possible", "2025-01-12", "high", false)
         ], "Dropshipping Project");
       };
 

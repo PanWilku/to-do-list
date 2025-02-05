@@ -1,5 +1,6 @@
 import { Task } from "./models/Task";
 import { Project } from "./models/Project";
+import { handleRemainingTime } from "./utils"; 
 
 
 export function initializeUI() {
@@ -139,10 +140,13 @@ export function renderTasks(project) {
     console.log(project);
     currentDisplayedProject = project;
 
+
+
     const taskContainer = document.getElementById("task-container");
     taskContainer.innerHTML = "";
 
     project.tasks.forEach((task, index) => {
+        const reamingTime = handleRemainingTime(task.dueDate);
         const taskDiv = document.createElement("div");
         taskDiv.id = index;
         taskContainer.appendChild(taskDiv);
@@ -153,6 +157,7 @@ export function renderTasks(project) {
                 <p class="text-2xl break-words flex-wrap">${task.title}
                 <p class="break-words flex-wrap">Description: ${task.description}</p>
                 <p>Due to: ${task.dueDate}, ${task.priority} priority</p>
+                <p>Reaming time: ${reamingTime}</p>
             </div>
             <div class="flex sm:w-2/5 max-sm:w-3/6 items-center sm:gap-8 max-sm: gap-4 p-2 justify-center">
             <div class="flex flex-col gap-4">
