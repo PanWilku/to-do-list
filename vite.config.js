@@ -4,5 +4,5 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
-  base: "/to-do-list";
+  base: "/to-do-list",
 });
