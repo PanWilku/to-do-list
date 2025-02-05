@@ -2,7 +2,7 @@ import { Task } from "./models/Task";
 import { Project } from "./models/Project";
 
 
-export function initializeUI(projects) {
+export function initializeUI() {
     
     const app = document.getElementById('app');
     app.innerHTML = ''; 
@@ -92,7 +92,6 @@ export function initializeUI(projects) {
 
 
 export function renderProjects(projects) {
-
     const element = document.getElementById("project-container");
     if (element) {
       element.remove(); //causes re-render of projects
@@ -137,7 +136,7 @@ export function renderProjects(projects) {
 let currentDisplayedProject;
 
 export function renderTasks(project) {
-
+    console.log(project);
     currentDisplayedProject = project;
 
     const taskContainer = document.getElementById("task-container");

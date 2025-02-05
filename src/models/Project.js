@@ -5,7 +5,6 @@ import { projects } from "../main";
 
 export class Project {
     constructor(tasks, name) {
-        // Ensure tasks is always an array:
         this.tasks = tasks;
         this.name = name;
     }
@@ -240,7 +239,6 @@ export class Project {
           const newProject = new Project([], formData.projectName);
           
           projects.push(newProject);
-          
           renderProjects(projects);
           
           Swal.fire("Added!", "New project added successfully.", "success");
@@ -284,7 +282,6 @@ export class Project {
           const { projectIndex } = result.value;
           
           projects.splice(projectIndex, 1);
-
           renderProjects(projects);
           
           Swal.fire("Deleted!", "Project has been deleted.", "success");
