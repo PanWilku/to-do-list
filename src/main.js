@@ -14,7 +14,13 @@ function getDefaultProjects() {
     Project.defaultProject(),
     new Project(
       [
-        new Task("Go to the concert", "TS concert", "2026-06-22", "medium", false),
+        new Task(
+          "Go to the concert",
+          "TS concert",
+          "2026-06-22",
+          "medium",
+          false
+        ),
         new Task(
           "Go to the supermarket",
           "tomatoes, cucumber, olive oil",
@@ -37,7 +43,7 @@ function initApp() {
     projects = getDefaultProjects();
   }
 
-  initializeUI(); 
+  initializeUI();
   renderProjects(projects);
   renderTasks(projects[0]);
 
